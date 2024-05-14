@@ -21,18 +21,4 @@ public class Resource {
         return "";
     }
 
-
-    @GET
-    @Path("transaction")
-    @WithTransaction
-    public Uni<String> updateTransaction()
-    {
-        for (HibernateOrmDevInfo.PersistenceUnit persistenceUnit : HibernateOrmDevController.get().getInfo().getPersistenceUnits()) {
-            String createDDL = persistenceUnit.getUpdateDDL();
-            return Uni.createFrom().item(createDDL);
-        }
-        return Uni.createFrom().failure(new NotFoundException());
-    }
-
-
 }
